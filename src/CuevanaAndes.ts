@@ -9,7 +9,7 @@
 /// <reference path="Actor.ts" />
 
     
-class CuevanaAndes
+export class CuevanaAndes
 {
     // Attributes
 	platform: Array<Platform>;
