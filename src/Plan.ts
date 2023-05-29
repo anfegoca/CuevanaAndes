@@ -1,20 +1,12 @@
-
-/* Generated with GenMyModel */
-
-
     
-class Plan
+export class Plan
 {
-    // Attributes
-	name: string;
-	cost: number;
-	description: string;
-	
-    // Implemented attributes
-	
-    // Operations
-	 
-	// Implemented operations
+	constructor(
+		private name: string,
+		private cost: number,
+		private description: string
+	){}
+
 	
 }
 

@@ -1,23 +1,24 @@
+import { Collaborator } from "./Collaborator";
+import { Episode } from "./Episode";
 
-/* Generated with GenMyModel */
-
-/// <reference path="Episode.ts" />
-/// <reference path="Collaborator.ts" />
-
-    
-class Serie
+export class Serie
 {
-    // Attributes
-	image: string;
-	name: string;
-	collaborator: Array<Collaborator>;
-	episode: Array<Episode>;
 	
-    // Implemented attributes
-	
-    // Operations
-	 
-	// Implemented operations
+	constructor(
+		private image: string,
+		private name: string,
+		private collaborators: Array<Collaborator>,
+		private episodes: Array<Episode>
+	){}
+
+	isYourName(name: string) : boolean {
+		let ans : boolean = false;
+		if(this.name == name){
+			ans = true;
+		}
+		return ans;
+	}
+    
 	
 }
 

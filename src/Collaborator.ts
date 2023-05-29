@@ -1,20 +1,12 @@
-
-/* Generated with GenMyModel */
-
-
     
-class Collaborator
+export class Collaborator
 {
-    // Attributes
-	name: string;
-	image: string;
-	description;
-	
-    // Implemented attributes
-	
-    // Operations
-	 
-	// Implemented operations
+    constructor(
+		protected name: string,
+		protected image: string,
+		protected description: string
+	){}
+
 	
 }
 

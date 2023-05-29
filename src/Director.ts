@@ -1,18 +1,14 @@
+import { Collaborator } from "./Collaborator";
 
-/* Generated with GenMyModel */
-
-/// <reference path="Collaborator.ts" />
-
-    
-class Director extends Collaborator
+export class Director extends Collaborator
 {
-    // Attributes
-	
-    // Implemented attributes
-	
-    // Operations
-	 
-	// Implemented operations
+    constructor(
+        name: string,
+		image: string,
+		description: string
+    ){
+        super(name,image,description)
+    }
 	
 }
 

@@ -1,20 +1,14 @@
 
-/* Generated with GenMyModel */
-
-
-    
-class Episode
+export class Episode
 {
-    // Attributes
-	name: string;
-	summary: string;
-	duration: number;
+    constructor(
+		private name: string,
+		private summary: string,
+		private duration: number
+	){}
 	
-    // Implemented attributes
 	
-    // Operations
-	 
-	// Implemented operations
+
 	
 }
 

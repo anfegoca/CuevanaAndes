@@ -1,30 +1,34 @@
+import { platform } from "os";
+import { Platform } from "./Platform";
+import { Serie } from "./Serie";
 
-/* Generated with GenMyModel */
-
-/// <reference path="Director.ts" />
-/// <reference path="Serie.ts" />
-/// <reference path="Category.ts" />
-/// <reference path="Platform.ts" />
-/// <reference path="Collaborator.ts" />
-/// <reference path="Actor.ts" />
 
     
 export class CuevanaAndes
 {
-    // Attributes
-	platform: Array<Platform>;
-	
-    // Implemented attributes
-	
-    // Operations
+    
+	constructor(
+		private platforms: Array<Platform>
+		){}
+    
 	getSeries(): Array<Serie> {
-		return []; //TODO: Implement
+		const ans: Set<Serie> = new Set();
+		this.platforms.forEach(platform => platform.getSeries().forEach(serie => ans.add(serie)));
+		return Array.from(ans);
 	}
 	
-	getSerie(name: string): Serie {
-		return null; //TODO: Implement
+	getSerie(name: string): Serie | undefined{
+		let ans = undefined;
+		for(const platform of this.platforms){
+			let serie = platform.getSerie(name);
+			if(serie != undefined){
+				ans = serie;
+				break;
+			}
+		}
+		return ans;
 	}
-	
+	/*
 	getCategories(name: string): Array<Category> {
 		return []; //TODO: Implement
 	}
@@ -75,6 +79,6 @@ export class CuevanaAndes
 	
 	 
 	// Implemented operations
-	
+	*/
 }
 
