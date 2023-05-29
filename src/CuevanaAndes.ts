@@ -1,6 +1,7 @@
-import { platform } from "os";
 import { Platform } from "./Platform";
 import { Serie } from "./Serie";
+import { Category } from "./Category";
+import { Collaborator } from "./Collaborator";
 
 
     
@@ -28,27 +29,48 @@ export class CuevanaAndes
 		}
 		return ans;
 	}
+	
+	getCategories(): Array<Category> {
+		const ans: Set<Category> = new Set();
+		this.platforms.forEach(platform => platform.getCategories().forEach(category => ans.add(category)));
+		return Array.from(ans);
+	}
+
+	getCollaboratorsBySerie(name: string): Array<Collaborator> | undefined{
+		let ans = undefined;
+		let serie = this.getSerie(name);
+		if(serie!=undefined){
+			ans = serie.getCollaborators();
+		}
+		return ans;
+	}
+	
+	getCollaborator(name: string): Collaborator | undefined {
+		let ans = undefined;
+		for(const platform of this.platforms){
+			let collaborator = platform.getCollaborator(name);
+			if(collaborator != undefined){
+				ans = collaborator;
+				break;
+			}
+		}
+		return ans;
+	}
+	
+	getPlatforms(): Array<Platform> {
+		return this.platforms;
+	}
+	
+	getPlatform(name: string): Platform | undefined{
+		let ans = undefined
+		for (const platform of this.platforms){
+			if(platform.isYourName(name)){
+				ans = platform;
+			}
+		}
+		return ans; 
+	}
 	/*
-	getCategories(name: string): Array<Category> {
-		return []; //TODO: Implement
-	}
-	
-	getCollaboratorsBySerie(name: string): Array<Collaborator> {
-		return []; //TODO: Implement
-	}
-	
-	getCollaborator(name: string): Collaborator {
-		return null; //TODO: Implement
-	}
-	
-	getPlatforms(name: string): Array<Platform> {
-		return []; //TODO: Implement
-	}
-	
-	getPlatform(name: string): Platform {
-		return null; //TODO: Implement
-	}
-	
 	createSerie(categoryName: string, image: string, nameSerie: string, platformName: string): Serie {
 		return null; //TODO: Implement
 	}

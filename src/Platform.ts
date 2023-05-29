@@ -12,10 +12,10 @@ export class Platform
 		private plans: Array<Plan>
 		){}
 
-	getSeries(): Set<Serie> {
+	getSeries(): Array<Serie> {
 		const ans: Set<Serie> = new Set();
 		this.categories.forEach(category => category.getSeries().forEach(serie => ans.add(serie)));
-		return ans;
+		return Array.from(ans);
 	}
 
 	getSerie(name: string) : Serie | undefined{
@@ -28,6 +28,30 @@ export class Platform
 			}
 		}
 		return ans;
+	}
+
+	getCollaborator(name: string) {
+		let ans = undefined;
+		for(const category of this.categories){
+			let collaborator = category.getCollaborator(name);
+			if(collaborator != undefined){
+				ans = collaborator;
+				break;
+			}
+		}
+		return ans;
+	}
+
+	isYourName(name: string) : boolean {
+		let ans : boolean = false;
+		if(this.name == name){
+			ans = true;
+		}
+		return ans;
+	}
+
+	getCategories(){
+		return this.categories;
 	}
 
 	

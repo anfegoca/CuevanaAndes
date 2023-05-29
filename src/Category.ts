@@ -24,6 +24,18 @@ export class Category
 		}
 		return ans;
 	}
+
+	getCollaborator(name: string) {
+		let ans = undefined;
+		for(const serie of this.series){
+			let collaborator = serie.getCollaborator(name);
+			if(collaborator!=undefined){
+				ans = collaborator;
+				break;
+			}
+		}
+		return ans;
+	}
     
 }
 

@@ -6,8 +6,58 @@ import { Episode } from "./Episode";
 import { Plan } from "./Plan";
 import { Platform } from "./Platform";
 import { Serie } from "./Serie";
+import readlineSync from 'readline-sync';
 
 var app: CuevanaAndes = getCuevanaAndes();
+
+function menuGetSerie(): void {
+  let serie = undefined;
+  console.log('Bienvenido al menú de obtención de series');
+  const name = readlineSync.question("Ingrese el nombre de la serie: ");
+  serie = app.getSerie(name);
+  if(serie != undefined){
+    console.log(serie);
+  }else{
+    console.log('No se encontró la serie');
+  }
+}
+
+function menuGetCollaborators(): void {
+  let collaborators = undefined;
+  console.log('Bienvenido al menú de colaboradores de series');
+  const name = readlineSync.question("Ingrese el nombre de la serie: ");
+  collaborators = app.getCollaboratorsBySerie(name);
+  if(collaborators != undefined){
+    console.log(collaborators);
+  }else{
+    console.log('No hay colaboradores registrados para la serie');
+  }
+}
+
+function menuGetCollaborator(): void {
+  let collaborator = undefined;
+  console.log('Bienvenido al menú de informacion colaboradores de series');
+  const name = readlineSync.question("Ingrese el nombre del colaborador de la serie: ");
+  collaborator = app.getCollaborator(name);
+  if(collaborator != undefined){
+    console.log(collaborator);
+  }else{
+    console.log('No se encontró el colaborador');
+  }
+}
+
+function menuGetPlatform(): void {
+  let platform = undefined;
+  console.log('Bienvenido al menú de informacion plataformas');
+  const name = readlineSync.question("Ingrese el nombre de la plataforma: ");
+  platform = app.getPlatform(name);
+  if(platform != undefined){
+    console.log(platform);
+  }else{
+    console.log('No se encontró la plataforma');
+  }
+}
+
 
 
 
@@ -35,7 +85,6 @@ function getCuevanaAndes() : CuevanaAndes {
   let app = new CuevanaAndes(platforms);
   return app;
 }
-
 
 function mostrarMenu() {
     console.log("\x1b[36m╔═══════════════════════════════════════════════════════════════════╗\x1b[0m");
@@ -65,22 +114,22 @@ function ejecutarOpcion(opcion: string) {
         console.log(app.getSeries());
         break;
       case "2":
-        console.log(app.getSerie());
+        menuGetSerie();
         break;
       case "3":
-        console.log(opcion);
+        console.log(app.getCategories());
         break;
       case "4":
-        console.log(opcion);
+        menuGetCollaborators();
         break;
       case "5":
-        console.log(opcion);
+        menuGetCollaborator();
         break;
       case "6":
-        console.log(opcion);
+        console.log(app.getPlatforms());
         break;
       case "7":
-        console.log(opcion);
+        menuGetPlatform();
         break;
       case "8":
         console.log(opcion);
@@ -114,21 +163,12 @@ function ejecutarOpcion(opcion: string) {
   
 function iniciarMenu() {
     mostrarMenu();
-    const readline = require("readline");
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-  
-    rl.question("Selecciona una opción: ", (opcion: string) => {
-      ejecutarOpcion(opcion);
-      rl.close();
-      iniciarMenu();
-    });
+    const opcionMenu = readlineSync.question("Selecciona una opción del menú: ");
+    ejecutarOpcion(opcionMenu);
+    iniciarMenu();
 }
 
 function main(){
-    
     iniciarMenu();
 }
 
