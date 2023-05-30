@@ -2,6 +2,9 @@ import { Platform } from "./Platform";
 import { Serie } from "./Serie";
 import { Category } from "./Category";
 import { Collaborator } from "./Collaborator";
+import { platform } from "os";
+import { Actor } from "./Actor";
+import { Director } from "./Director";
 
 
     
@@ -70,37 +73,75 @@ export class CuevanaAndes
 		}
 		return ans; 
 	}
-	/*
-	createSerie(categoryName: string, image: string, nameSerie: string, platformName: string): Serie {
-		return null; //TODO: Implement
+	
+	createSerie(categoryName: string, image: string, nameSerie: string, platformName: string): Serie | undefined {
+		let ans = undefined;
+		let platform = this.getPlatform(platformName);
+		if(platform != undefined){
+			ans = platform.createSerie(categoryName,nameSerie,image);
+		}
+		return ans; 
 	}
 	
-	createCategory(platformName: string, CategoryName: string, descriptionCategory: string): Category {
-		return null; //TODO: Implement
+	createCategory(categoryName: string, descriptionCategory: string): Category | undefined{
+		let ans = undefined;
+		this.platforms.forEach(platform => ans = platform.createCategory(categoryName,descriptionCategory));
+		return ans;
 	}
 	
-	createActor(name: string, image: string, description: string, serieName: string): Actor {
-		return null; //TODO: Implement
+	createActor(name: string, image: string, description: string, serieName: string): Actor | undefined{
+		let ans = undefined;
+		for(const platform of this.platforms){
+			ans = platform.createActor(name,image,description,serieName);
+			if(ans != undefined){
+				break;
+			}
+		}
+		return ans;
+		
 	}
 	
-	createDirector(name: string, image: string, description: string, nameSerie): Director {
-		return null; //TODO: Implement
+	createDirector(name: string, image: string, description: string, nameSerie: string): Director | undefined{
+		let ans = undefined;
+		for(const platform of this.platforms){
+			ans = platform.createDirector(name,image,description,nameSerie);
+			if(ans != undefined){
+				break;
+			}
+		}
+		return ans;
 	}
 	
 	addCategoryToSerie(nameCategory: string, nameSerie: string): boolean {
-		return false; //TODO: Implement
+
+		let ans = 0;
+		this.platforms.forEach(platform => { 
+			if(platform.addCategoryToSerie(nameCategory,nameSerie)){
+				ans++;
+			}
+		});
+		return ans > 0 ? true : false;
 	}
 	
 	addActorToSerie(nameActor: string, nameSerie: string): boolean {
-		return false; //TODO: Implement
+		let ans = 0;
+		this.platforms.forEach(platform => { 
+			if(platform.addActorToSerie(nameActor,nameSerie)){
+				ans++;
+			}
+		});
+		return ans > 0 ? true : false;
 	}
 	
 	addDirectorToSerie(nameDirector: string, nameSerie: string): boolean {
-		return false; //TODO: Implement
+		let ans = 0;
+		this.platforms.forEach(platform => { 
+			if(platform.addDirectorToSerie(nameDirector,nameSerie)){
+				ans++;
+			}
+		});
+		return ans > 0 ? true : false;
 	}
 	
-	 
-	// Implemented operations
-	*/
 }
 

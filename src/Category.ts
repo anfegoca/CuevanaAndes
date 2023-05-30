@@ -36,6 +36,48 @@ export class Category
 		}
 		return ans;
 	}
+
+	createSerie(name: string, image: string){
+		let serie = new Serie(image,name,[],[]);
+		this.series.push(serie);
+		return serie;
+	}
+
+	createActor(name: string, image: string, description: string, serieName: string){
+		let ans = undefined;
+		let serie = this.getSerie(serieName);
+		if(serie != undefined){
+			ans = serie.createActor(name,image,description);
+		}
+		return ans;
+	}
+
+	createDirector(name: string, image: string, description: string, serieName: string){
+		let ans = undefined;
+		let serie = this.getSerie(serieName);
+		if(serie != undefined){
+			ans = serie.createDirector(name,image,description);
+		}
+		return ans;
+	}
+
+	isYourName(name: string) : boolean {
+		let ans : boolean = false;
+		if(this.name == name){
+			ans = true;
+		}
+		return ans;
+	}
+
+	addSerie(serie: Serie){
+		let ans = false;
+		let serieA = this.getSerie(serie.getName());
+		if(serieA == undefined){
+			this.series.push(serie);
+			ans = true;
+		}
+		return ans;
+	}
     
 }
 

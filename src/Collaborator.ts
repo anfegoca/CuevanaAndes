@@ -15,6 +15,9 @@ export class Collaborator
 		}
 		return ans;
 	}
+	getName(){
+		return this.name;
+	}
 
 	
 }
